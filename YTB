@@ -1,1 +1,20 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Downloader</title>
+</head>
+<body>
+  <div class="container">
+    <h1>📥 YouTube Video Downloader</h1>
+    <form action="/download" method="POST">
+      <input type="text" name="url" placeholder="Paste YouTube video link here..." required />
+      <button type="submit">Download Video</button>
+    </form>
+    <div class="footer">
+      For educational use only · Powered by Node.js & ytdl-core
+    </div>
+  </div>
+</body>
+</html>
