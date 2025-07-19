@@ -1,31 +1,16 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const ytdl = require('ytdl-core');
-const path = require('path');
-const app = express();
-const port = 3000;
+const canvas = document.getElementById("molten");
+const ctx = canvas.getContext("2d");
 
-// Serve static files
-app.use(express.static(__dirname));
-app.use(bodyParser.urlencoded({ extended: true }));
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-// Serve index.html
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Handle video download
-app.post('/download', async (req, res) => {
-  const videoURL = req.body.url;
-
-  if (!ytdl.validateURL(videoURL)) {
-    return res.status(400).send('Invalid YouTube URL');
-  }
-
-  res.header('Content-Disposition', 'attachment; filename="video.mp4"');
-  ytdl(videoURL, { format: 'mp4' }).pipe(res);
-});
-
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+function drawMolten() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  gradient.addColorStop(0, "rgba(255, 100, 0, 0.3)");
+  gradient.addColorStop(1, "rgba(255, 0, 0, 0.6)");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  requestAnimationFrame(drawMolten);
+}
+drawMolten();
